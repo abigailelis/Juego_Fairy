@@ -1,0 +1,272 @@
+body {
+    margin: 0;
+    max-height: 100%;
+    overflow-y: hidden; 
+    overflow-x: hidden;
+    background: #ffffff;
+    image-rendering: pixelated;
+}
+
+/*------------------------ MENU PRINCIPAL y CONTENEDORES  --------------------------*/
+
+
+/*-- Contenedor del juego principal y del Menu --*/
+
+#game{
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden; 
+    overflow-x: hidden;
+}
+
+#home{
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    perspective: 1px;
+}
+
+/*-- Capas del menú --*/
+
+.parallax-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    animation: zoomOut forwards;
+}
+
+#layer1 {
+    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/Sky.png");
+    animation-duration: 2s;
+}
+
+#layer2 {
+    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/BG_Decor.png");
+    animation-duration: 4s;
+}
+
+#layer3 {
+    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/Middle_Decor.png");
+    animation-duration: 6s;
+}
+
+#layer4 {
+    background-image: url("./PNG/Cartoon_Forest_BG_01/Layers/Foreground.png");
+    animation-duration: 7s;
+}
+
+#layer5 {
+    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/Ground1.png");
+    animation-duration: 8s;
+}
+
+/*-- Contenedor de información del juego y menu --*/
+
+#game-information, #menu{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    color: white;
+    font-size:larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+#menu{
+    top: 50%;
+    animation: zoomOut 9s forwards;
+}
+
+
+/*----------------------------- PERSONAJE Y ENEMIGOS ------------------------------*/
+
+#fairy, .enemy, .potion, .levelUp{
+    margin: auto;
+    position: absolute;
+}
+
+.enemy { 
+    width: 145px;
+    height: 130px;
+    bottom: 10%;
+    right: -100px;
+    background-image: url("./PNG/Enemys/golum2walk.png");  
+}
+
+#fairy {
+    height: 128px;
+    top: 65%;
+    left: 30%;
+
+}
+
+.fly{
+    width: 145px;
+    background-image: url("./PNG/Main-character/fairyFly.png");
+    animation: character_spritesheet  1s steps(10) infinite;
+}
+
+.attack{
+    width: 253px;
+    background-image: url("./PNG/Main-character/fairyAttack.png");
+    animation: character_attack 1s steps(10) infinite;
+}
+
+.blink {
+    animation: blink 0.5s steps(5, start) infinite;
+}
+
+.start_enemy{
+    animation: enemy_hitting 1s steps(12) infinite, move_x 13s linear;
+}
+
+.die_enemy {
+    width: 135px;
+    background-image: url("./PNG/Enemys/golumDying.png");
+    animation: enemy_die 1s steps(15) forwards;
+}
+
+/*------------------------------------ ITEMS ---------------------------------------*/
+.potion, .levelUp{
+    width: 100px;
+    height: 100px;
+}
+
+.potion{
+    bottom: 10%;
+    right: -100px;
+    background-image: url("./PNG/Items/antidote.png"); 
+}
+
+.levelUp{
+    bottom: 50%;
+    right: 0;
+    background-image: url("./PNG/Items/nextLevel.png"); 
+}
+
+.start_item{
+    animation: move_x 20s linear;
+}
+
+/*----------------------- CAPAS - PARALLAX SCROLLING DEL JUEGO -----------------------*/
+
+.bg-parallax {
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-size:1920px 100%;
+    position:absolute;
+}
+
+.start {
+    animation: movebg linear infinite;
+}
+
+/* Animación del cielo */
+#sky {
+    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Sky.png");
+    animation-duration: 40s;
+}
+
+/* Animación del bosque de fondo */
+#bg-decor {
+    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/BG_Decor.png");
+    animation-duration: 35s;
+}
+
+/* Animación del bosque de intermedio */
+#middle-decor {
+    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Middle_Decor.png");
+    animation-duration: 30s;
+}
+
+/* Animación del bosque de principal */
+#foreground {
+    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Foreground.png");
+    animation-duration: 25s;
+}
+
+/* Animación del pasto. La capa más cercana */
+#ground {
+    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Ground1.png");
+    animation-duration: 8s;
+    bottom: -10px;
+    z-index: 1;
+}
+
+/* Clase para ocultar objetos o pantallas completas */
+
+.hidden{
+    display:none;
+}
+
+/*----------------------------- ANIMACIONES @KEYFRAMES ----------------------------*/
+
+/* Animaciones Parallax */
+
+@keyframes zoomOut {
+    from { transform: scale(1.5) }
+    to { transform: scale(1) }
+}
+
+@keyframes movebg {
+    from { background-position: 0; }
+    to { background-position: -1920px; }
+}
+
+/* Animaciones de personaje y enemigos */
+
+@keyframes character_spritesheet {
+    from { background-position: 0; }
+    to { background-position: -1450px; }
+}
+
+@keyframes character_attack {
+    from { background-position: 0; }
+    to { background-position: -2537px; }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes enemy_hitting {
+    0% { background-position: 0; }
+    100% { background-position: -1751px; }
+}
+
+@keyframes enemy_die {
+    from { 
+        background-position: -2021px;
+        opacity: 1;
+        transform: translateX(-200px);  
+    }
+    to { 
+        background-position: 0; 
+        opacity: 0;
+        transform: translateX(-200px);   
+    }
+}
+
+/*-- items --*/
+
+@keyframes move_x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100vw); }
+}
+
+
+
+

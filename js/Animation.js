@@ -8,6 +8,7 @@ class Animation {
         /* Obtiene los elementos del DOM */
 
         let enemys = document.getElementsByClassName('enemy');
+        let specialEnemys = document.getElementsByClassName('specialEnemy');
         let parallax = document.getElementsByClassName('bg-parallax');
         let items = document.getElementsByClassName('potion');
         let main_character = document.getElementById('fairy');
@@ -15,18 +16,21 @@ class Animation {
         /* Los convierte en Array para recorrerlos con foreach */
 
         enemys = Array.from(enemys);
+        specialEnemys = Array.from(specialEnemys);
         parallax = Array.from(parallax);
         items = Array.from(items);
 
-        return { enemys, parallax, items, main_character}
+        return { enemys, specialEnemys, parallax, items, main_character}
     }
 
     stopAnimation() {
         let elements = this.getDomElements();
 
         let enemys = elements.enemys;
+        let specialEnemys = elements.specialEnemys;
         let parallax = elements.parallax;
         let items = elements.items;
+
 
         /* Pausa al personaje principal */
 
@@ -35,6 +39,10 @@ class Animation {
         /* Pausa todos los enemigos en su posicion actual */
 
         enemys.forEach(enemy => {
+            enemy.style.animationPlayState = 'paused';
+        });
+
+        specialEnemys .forEach(enemy => {
             enemy.style.animationPlayState = 'paused';
         });
 
@@ -57,7 +65,9 @@ class Animation {
         let elements = this.getDomElements();
 
         let enemys = elements.enemys;
+        let specialEnemys = elements.specialEnemys;
         let parallax = elements.parallax;
+        let items = elements.items;
 
         /* Retoma las animaciones del personaje principal */
 
@@ -69,10 +79,20 @@ class Animation {
             enemy.style.animationPlayState = 'running';
         });
 
+        specialEnemys .forEach(enemy => {
+            enemy.style.animationPlayState = 'running';
+        });
+
         /* Retoma las animaciones parallax del ambiente */
 
         parallax.forEach(layer => {
             layer.style.animationPlayState = 'running';
+        });
+
+        /* Retoma todas las posiones */
+
+        items.forEach(item => {
+            item.style.animationPlayState = 'running';
         });
 
         this.running = true;

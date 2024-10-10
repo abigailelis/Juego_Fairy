@@ -5,6 +5,7 @@ class Character{
         this.isLive = true;
     }
     
+    /*-- Le quita vidas al personaje/enemigo --*/
     
     lostLive(){
         if(this.lives > 0){
@@ -14,15 +15,18 @@ class Character{
         }    
     }
 
+    /*-- Adiciona vidas al personaje/enemigo --*/
+
     addLive(cant){
         this.lives += cant;
     }
 
+    /*-- Retorna true o false si el personaje/enemigo está vivo --*/
     isAlive(){
         return this.isLive;
     }
-
-    
+     
+    /*-- Retorna la cantidad de vidas actuales del personaje/enemigo --*/
     getLives(){
         return this.lives;
     }

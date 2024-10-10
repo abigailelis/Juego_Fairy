@@ -5,7 +5,7 @@ class Item{
     }
 
 
-    /* Si el enemigo ya fue ciolisionado lo almacena en la variable collisioned */
+    /* Si el item ya fue ciolisionado lo almacena en la variable collisioned */
 
     collision(isCollisioned) {
         this.collisioned = isCollisioned;

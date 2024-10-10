@@ -24,8 +24,15 @@ class LevelUp extends Item{
 
     }
 
+    /*-- Sonido al llegar a la puerta --*/
+
     takeLevelUp(){
         this.nextLevelSound.play();
-        this.item.style.display = 'none';
+    }
+
+    /* Obtiene las coordenadas actuales del personaje */
+
+    status(){
+        return this.item.getBoundingClientRect();
     }
 }

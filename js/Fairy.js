@@ -3,12 +3,13 @@ class Fairy extends Character {
     constructor(elementId, lives){
         super(lives);
         this.character = document.getElementById(elementId);
+        this.character.classList.add('fly');
         this.coord = this.character.getBoundingClientRect();
         this.x = this.coord.left;
         this.y = this.coord.top;
-        this.steps = 5;
+        this.steps = 6;
         this.attackSound = new Sound('./sounds/FairyAttack.mp3');
-        this.fairyAttacked = new Sound ('./sounds/fairyDead.wav');
+  
     }
 
     /* Acción principal del personaje - volar */
@@ -34,7 +35,7 @@ class Fairy extends Character {
         this.status();
     }
 
-    /* Actualiza las coordenadas actuales del personaje */
+    /* Mueve al personaje según las teclas oprimidas y no le permite salir de los bordes de la pantalla  */
 
     moveTo(key){
         const screenWidth = window.innerWidth;
@@ -55,8 +56,9 @@ class Fairy extends Character {
     /* Elimina todas las clases del personaje */
 
     clean(){
-        this.character.classList.remove('attack');
         this.character.classList.remove('fly');
+        if(this.isAttacking)
+            this.character.classList.remove('attack');
     }
 
     /* Verifica si el personaje está atacando o no */
@@ -65,19 +67,24 @@ class Fairy extends Character {
         return this.character.classList.contains('attack');
     }
 
-    /* Se modifica si el personaje muere */
+    /* Se modifica si el personaje pierde una vida */
 
     isAttacked(){
         this.character.classList.add('blink');
-        this.fairyAttacked.play();
         setTimeout(() => {
             this.character.classList.remove('blink');
         }, 3000);
     }
 
+    /* Oculta al elemento */
+
+    hidde(){
+        this.character.classList.add('hidden');
+    }
+
     /* Obtiene las coordenadas actuales del personaje */
 
     status(){
-        this.character.getBoundingClientRect();
+        return this.character.getBoundingClientRect();
     }
 }

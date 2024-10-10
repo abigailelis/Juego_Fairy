@@ -1,25 +1,89 @@
 body {
     margin: 0;
     max-height: 100%;
-    overflow-y: hidden; 
+    overflow-y: hidden;
     overflow-x: hidden;
     background: #ffffff;
     image-rendering: pixelated;
 }
 
-/*------------------------ MENU PRINCIPAL y CONTENEDORES  --------------------------*/
+/*------------- LOADER ----------------*/
 
+@import url('//fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap');
+
+#loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    background-color: #FFF;
+    color: #424242;
+    transition: opacity 1s ease;
+}
+
+#loader.loaderHidden {
+    opacity: 0;
+    pointer-events: none; /* Evita que el cargador bloquee la interacción */
+}
+
+.contenedor {
+    display: grid;
+    place-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.cargando {
+    width: 120px;
+    height: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.texto-cargando {
+    padding-top: 20px
+}
+
+.cargando span {
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    
+    animation: salto .5s alternate infinite;
+    border-radius: 50%
+}
+
+.circle:nth-child(2) {
+    animation-delay: .18s;
+}
+
+.circle:nth-child(3) {
+    animation-delay: .37s;
+}
+
+/*------------ MENU PRINCIPAL y CONTENEDORES  ------------*/
 
 /*-- Contenedor del juego principal y del Menu --*/
 
-#game{
+#game {
     width: 100%;
     height: 100%;
-    overflow-y: hidden; 
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
-#home{
+#home {
     position: relative;
     height: 100vh;
     overflow: hidden;
@@ -36,122 +100,160 @@ body {
     height: 100%;
     background-size: cover;
     background-position: center;
+
+}
+
+.start_parallax_menu {
     animation: zoomOut forwards;
 }
 
-#layer1 {
-    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/Sky.png");
-    animation-duration: 2s;
-}
-
-#layer2 {
-    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/BG_Decor.png");
-    animation-duration: 4s;
-}
-
-#layer3 {
-    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/Middle_Decor.png");
-    animation-duration: 6s;
-}
-
-#layer4 {
-    background-image: url("./PNG/Cartoon_Forest_BG_01/Layers/Foreground.png");
-    animation-duration: 7s;
-}
-
-#layer5 {
-    background-image: url("./PNG/Cartoon_Forest_BG_02/Layers/Ground1.png");
-    animation-duration: 8s;
-}
 
 /*-- Contenedor de información del juego y menu --*/
-
-#game-information, #menu{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    position: absolute;
-    color: white;
-    font-size:larger;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-}
-
-#menu{
+#menu {
     top: 50%;
     animation: zoomOut 9s forwards;
 }
 
+#game-information, #menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 1px 1px 2px rgb(27, 27, 27);
+}
+
+div.card {
+    width: 30%;
+    height: auto;
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    background-color: rgba(255, 255, 255, 0.959);
+    color: rgb(59, 59, 59)
+}
+
+.bg_win, .bg_gameOver {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+}
+
+.bg_win {
+    background-image: url("./PNG/bg_Win.png");
+}
+
+.bg_gameOver {
+    background-image: url("./PNG/bg_GameOver.png");
+}
+
+#totalScores_info, #level_info {
+    font-weight: bold;
+    font-size: large;
+}
+
+#info_gameOver {
+    font-size: small;
+}
+
+.card-title {
+    font-size: xx-large;
+}
 
 /*----------------------------- PERSONAJE Y ENEMIGOS ------------------------------*/
 
-#fairy, .enemy, .potion, .levelUp{
+#fairy, .enemy, .specialEnemy, .potion, .levelUp {
     margin: auto;
     position: absolute;
 }
 
-.enemy { 
-    width: 145px;
-    height: 130px;
-    bottom: 10%;
-    right: -100px;
-    background-image: url("./PNG/Enemys/golum2walk.png");  
-}
+/*--- PERSONAJE PRINCIPAL ----*/
 
 #fairy {
     height: 128px;
     top: 65%;
     left: 30%;
-
 }
 
-.fly{
+.fly {
     width: 145px;
     background-image: url("./PNG/Main-character/fairyFly.png");
-    animation: character_spritesheet  1s steps(10) infinite;
+    animation: character_spritesheet 1s steps(10) infinite;
 }
 
-.attack{
+.attack {
     width: 253px;
     background-image: url("./PNG/Main-character/fairyAttack.png");
     animation: character_attack 1s steps(10) infinite;
 }
 
-.blink {
-    animation: blink 0.5s steps(5, start) infinite;
+/*---- ENEMIGO COMÚN -----*/
+
+.enemy {
+    width: 145px;
+    height: 130px;
+    bottom: 10%;
+    right: -100px;
+    background-image: url("./PNG/Enemys/golum2walk.png");
 }
 
-.start_enemy{
-    animation: enemy_hitting 1s steps(12) infinite, move_x 13s linear;
+.start_enemy {
+    animation: enemy_hitting 1s steps(12) infinite, move_x 6s linear;
 }
 
 .die_enemy {
     width: 135px;
     background-image: url("./PNG/Enemys/golumDying.png");
-    animation: enemy_die 1s steps(15) forwards;
+    animation: enemy_die 1s steps(15) forwards, move_x 6s forwards;
 }
+
+/*---- ENEMIGO ESPECIAL -----*/
+
+.specialEnemy{
+    width: 135px;
+    height: 100px;
+    bottom: 40%;
+    right: -100px;
+    background-image: url("./PNG/Enemys/spirit.png");
+}
+
+.start_specialEnemy{
+    animation: fly 5s linear, float 2s ease-in-out infinite;
+}
+
+.die_specialEnemy{
+    animation: die_specialEnemy 4s forwards, fly 5s forwards;
+}
+
 
 /*------------------------------------ ITEMS ---------------------------------------*/
-.potion, .levelUp{
+
+/*-- POSIONES --*/
+.potion {
     width: 100px;
     height: 100px;
-}
-
-.potion{
     bottom: 10%;
     right: -100px;
-    background-image: url("./PNG/Items/antidote.png"); 
+    background-image: url("./PNG/Items/antidote.png");
 }
 
-.levelUp{
-    bottom: 50%;
+/*-- DOOR NEXT LEVEL --*/
+.levelUp {
+    width: 200px;
+    height: 200px;
+    bottom: 30px;
     right: 0;
-    background-image: url("./PNG/Items/nextLevel.png"); 
+    background-image: url("./PNG/Items/nextLevel.png");
 }
 
-.start_item{
+.start_item {
     animation: move_x 20s linear;
 }
 
@@ -161,77 +263,274 @@ body {
     width: 100%;
     height: 100%;
     background-repeat: repeat-x;
-    background-size:1920px 100%;
-    position:absolute;
-}
-
-.start {
+    background-size: 1920px 100%;
+    position: absolute;
     animation: movebg linear infinite;
 }
 
-/* Animación del cielo */
-#sky {
-    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Sky.png");
+#sky{
+    background-image: url('./PNG/Cartoon_Forest_BG_04/Layers/Sky.png');
     animation-duration: 40s;
 }
 
-/* Animación del bosque de fondo */
-#bg-decor {
-    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/BG_Decor.png");
-    animation-duration: 35s;
-}
-
-/* Animación del bosque de intermedio */
-#middle-decor {
-    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Middle_Decor.png");
+#bg-decor{
+    background-image: url('./PNG/Cartoon_Forest_BG_04/Layers/BG_Decor.png');
     animation-duration: 30s;
 }
 
-/* Animación del bosque de principal */
-#foreground {
-    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Foreground.png");
+#middle-decor{
+    background-image: url('./PNG/Cartoon_Forest_BG_04/Layers/Middle_Decor.png');
+    animation-duration: 30s;
+}
+
+#foreground{
+    background-image: url('./PNG/Cartoon_Forest_BG_04/Layers/Foreground.png');
     animation-duration: 25s;
 }
 
-/* Animación del pasto. La capa más cercana */
 #ground {
-    background-image: url("./PNG/Cartoon_Forest_BG_04/Layers/Ground1.png");
+    background-image: url('./PNG/Cartoon_Forest_BG_04/Layers/Ground1.png');
     animation-duration: 8s;
-    bottom: -10px;
+    bottom: -30px;
     z-index: 1;
 }
 
 /* Clase para ocultar objetos o pantallas completas */
 
-.hidden{
-    display:none;
+.hidden {
+    display: none;
 }
 
+/* Clase para "titilar" objetos */
+
+.blink {
+    animation: blink 0.5s steps(5, start) infinite;
+}
+
+.btn-light:hover{
+    box-shadow: 1px 1px 5px grey;
+}  
+
+/*--- HOW TO PLAY PAGE ----*/
+
+.howToPlay{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+ 
+}
+
+.parent {
+    position: absolute;
+    display: grid;
+    background-color: #fffcfcde;
+    box-shadow: 3px 3px 5px rgb(44, 44, 44);
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    gap: 8px;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    color: rgb(39, 39, 39);
+}
+
+
+
+.info_how_to_play{
+    display:flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+   
+.close_windows{
+    display:flex;
+    justify-content: end;
+    grid-column: span 5 / span 5;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    gap:0;
+}
+
+.tittle_how {
+    grid-column: span 5 / span 5;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    text-align: center;
+    line-height: 7px;
+}
+
+.keys_how {
+    grid-column: span 3 / span 3;
+    grid-column-start: 3;
+    grid-row-start: 3;
+}
+
+.enemies_how{
+    grid-column: span 5 / span 5;
+    grid-column-start: 2;
+    grid-row-start: 5;
+    text-align: center;
+    line-height: 7px;
+}
+
+.common_enemy_how {
+    grid-column: span 1 / span 1;
+    grid-column-start: 3;
+    grid-row-start: 7;
+}
+
+.special_enemy_how {
+    grid-column: span 1 / span 1;
+    grid-column-start: 4;
+    grid-row-start: 7;
+}
+
+.mini{
+    width: 100px;
+    height: auto;
+}
+
+.text_bolder{
+    font-weight: bolder;
+    font-size: larger;
+}
+
+i{
+    color:#b30378;
+    font-size: 15px;
+}
+   
 /*----------------------------- ANIMACIONES @KEYFRAMES ----------------------------*/
 
-/* Animaciones Parallax */
+/* Animaciones Parallax Zoom Out */
 
 @keyframes zoomOut {
-    from { transform: scale(1.5) }
-    to { transform: scale(1) }
+    from {
+        transform: scale(1.5)
+    }
+
+    to {
+        transform: scale(1)
+    }
 }
+
+/* Animaciones Parallax  mueve las capas en el eje X*/
 
 @keyframes movebg {
-    from { background-position: 0; }
-    to { background-position: -1920px; }
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -1920px;
+    }
 }
 
-/* Animaciones de personaje y enemigos */
+/* Animaciones de spritesheet del personaje principal */
 
 @keyframes character_spritesheet {
-    from { background-position: 0; }
-    to { background-position: -1450px; }
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -1450px;
+    }
 }
 
+/* Animaciones de spritesheet del personaje principal atacando */
+
 @keyframes character_attack {
-    from { background-position: 0; }
-    to { background-position: -2537px; }
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -2537px;
+    }
 }
+
+/* Animaciones de spritesheet del enemigo común atacando */
+
+@keyframes enemy_hitting {
+    0% {
+        background-position: 0;
+    }
+
+    100% {
+        background-position: -1751px;
+    }
+}
+
+/* Animaciones de spritesheet del enemigo común muriendo */
+
+@keyframes enemy_die {
+    from {
+        background-position: -2021px;
+        opacity: 1;
+    }
+
+    to {
+        background-position: 0;
+        opacity: 0;
+    }
+}
+
+/* Animaciones del enemigo especial muriendo */
+
+@keyframes die_specialEnemy {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+/* Animaciones del enemigo especial volando */
+
+@keyframes fly {
+    0% {
+        right: -100px; 
+    }
+    100% {
+        right: 100%; 
+    }
+}
+
+/* Animaciones del enemigo especial "flotando" */
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px); /* Flota hacia arriba */
+    }
+}
+
+/* Animaciones para desplazar elementos en el eje X */
+
+@keyframes move_x {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100vw);
+    }
+}
+
+
+
+/* Animaciones de "titilar" de objetos */
 
 @keyframes blink {
     0%, 100% {
@@ -242,31 +541,17 @@ body {
     }
 }
 
-@keyframes enemy_hitting {
-    0% { background-position: 0; }
-    100% { background-position: -1751px; }
-}
+/* Animación del loader */
 
-@keyframes enemy_die {
-    from { 
-        background-position: -2021px;
-        opacity: 1;
-        transform: translateX(-200px);  
+@keyframes salto {
+    from {
+        transform: scaleX(1.25);
+            background-color: #ff50c5d5;
     }
-    to { 
-        background-position: 0; 
-        opacity: 0;
-        transform: translateX(-200px);   
+
+    to {
+        transform:
+            translateY(-50px) scaleX(1);
+            background-color: #b30378;
     }
 }
-
-/*-- items --*/
-
-@keyframes move_x {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100vw); }
-}
-
-
-
-

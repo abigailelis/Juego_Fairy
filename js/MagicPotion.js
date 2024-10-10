@@ -1,6 +1,6 @@
-class MagicPotion extends Item{
+class MagicPotion extends Item {
 
-    constructor(id, lives){
+    constructor(id, lives) {
         super();
         this.id = id;
         this.lives = lives;
@@ -10,13 +10,8 @@ class MagicPotion extends Item{
         this.element.className = 'potion';
         this.game.appendChild(this.element);
         this.item = document.getElementById(id);
-        this.takePotionSound = new Sound ('./sounds/takePotion.wav');
-    }
-
-    /*-- Retorna la cantidad de vidas que incrementa la posión --*/
-    
-    getLives(){
-        return this.lives;
+        this.takePotionSound = new Sound('./sounds/takePotion.wav');
+        this.start();
     }
 
     /*-- Comienza la animación del item y al finalizar la animación lo oculta --*/
@@ -31,12 +26,29 @@ class MagicPotion extends Item{
 
     }
 
-    takePotion(){
+    /*-- Crea el efecto al tomar la posión y la oculta --*/
+
+    takePotion() {
+        this.collision(true);
         this.takePotionSound.play();
         this.item.style.display = 'none';
     }
 
-    cleanDom(){
+    /*-- Retorna la cantidad de vidas que incrementa la posión --*/
+
+    getLives() {
+        return this.lives;
+    }
+
+    /*-- Elimina el elemento del DOM --*/
+
+    cleanDom() {
         this.item.remove();
+    }
+
+    /* Obtiene las coordenadas actuales del personaje */
+
+    status() {
+        return this.item.getBoundingClientRect();
     }
 }
